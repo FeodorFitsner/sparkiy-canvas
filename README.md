@@ -8,7 +8,7 @@ This is an (unofficial) preliminary implementation that might eventually get int
 
 **Note**
 
-This project is a temporary repository used as a test for the time being, it will get renamed and become stand-alone in the future. A Nuget package will certainly be available as well as other platforms (TBD) because right now it only targets WinRT.
+This project is a temporary repository used as a test for the time being, it will get renamed and become stand-alone in the future. A Nuget package will certainly be available as well as other platforms (TBD) because right now it only targets WinRT though not all of them since it uses DirectX 11 features.
 
 **Issues**
 
