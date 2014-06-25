@@ -12,7 +12,7 @@ This project is a temporary repository used as a test for the time being, it wil
 
 **Issues**
 
-~~The ```Direct2DService``` class still has some problems when window gets resized, the origin of the problem is explained here: https://github.com/aybe/SharpDX.Toolkit.Game.Direct2D/blob/master/SharpDX.Toolkit.Game.Ex.WinRT/Direct2DService.cs#L133~~ : fixed by xoofx (https://github.com/xoofx)
+~~The ```Direct2DService``` class still has some problems when window gets resized, the origin of the problem is explained here: https://github.com/aybe/SharpDX.Toolkit.Game.Direct2D/blob/master/SharpDX.Toolkit.Game.Ex.WinRT/Direct2DService.cs#L133~~ : **fixed by xoofx** (https://github.com/xoofx)
 
 **Future**
 
