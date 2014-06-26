@@ -172,6 +172,12 @@ namespace SharpDX.Toolkit
         }
 
         /// <summary>
+        /// Restores the default device context target.
+        /// </summary>
+        public void SetDefaultDeviceContextTarget() {
+            _deviceContext.Target = _target;
+        }
+        /// <summary>
         ///     Handles the <see cref="IGraphicsDeviceService.DeviceDisposing" /> event.
         ///     Disposes the <see cref="Direct2DService.Device" />, <see cref="DeviceContext" /> and its render target
         ///     associated with the current <see cref="Direct2DService" /> instance.

@@ -108,6 +108,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CanvasConcept.cs" />
+    <Compile Include="ComObjectExtensions.cs" />
     <Compile Include="Direct2DService.cs" />
     <Compile Include="IDirect2DService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

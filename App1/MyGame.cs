@@ -10,9 +10,13 @@ using SharpDX.Toolkit.Graphics;
 using SharpDX.WIC;
 using BitmapInterpolationMode = SharpDX.Direct2D1.BitmapInterpolationMode;
 using Buffer = SharpDX.Toolkit.Graphics.Buffer;
+using CommandList = SharpDX.Direct2D1.CommandList;
+using Device = SharpDX.Direct3D11.Device;
 using DeviceContext = SharpDX.Direct2D1.DeviceContext;
 using Factory1 = SharpDX.DirectWrite.Factory1;
+using Image = SharpDX.Direct2D1.Image;
 using PixelFormat = SharpDX.WIC.PixelFormat;
+using Texture2D = SharpDX.Toolkit.Graphics.Texture2D;
 
 namespace App1 {
     internal class MyGame : Game {
@@ -21,8 +25,10 @@ namespace App1 {
         private readonly GraphicsDeviceManager _graphicsDeviceManager;
         private readonly Direct2DService _service;
         private BasicEffect _basicEffect;
+        private SolidColorBrush _brush;
         private Buffer<VertexPositionColor> _buffer;
         private VertexInputLayout _bufferLayout;
+        private CommandList _commandList;
         private Bitmap1 _example1Bitmap;
         private SolidColorBrush _example2Brush1;
         private SolidColorBrush _example2Brush2;
@@ -33,6 +39,10 @@ namespace App1 {
         private PathGeometry _example3Geometry;
         private SolidColorBrush _example4Brush;
         private TextFormat _example4TextFormat;
+        private ShaderResourceView _shaderResourceView;
+        private SpriteBatch _spriteBatch;
+        private Bitmap1 _target;
+        private Texture2D _texture2D;
 
         #endregion
 
@@ -132,8 +142,41 @@ namespace App1 {
             _example4TextFormat = new TextFormat(directWriteFactory, "Segoe UI", 32.0f);
             _example4Brush = new SolidColorBrush(context, Color4.Black);
 
+            ////////////////////////////////
+
+
+            var texture2D11 = new SharpDX.Direct3D11.Texture2D(GraphicsDevice,
+                new Texture2DDescription {
+                    BindFlags = BindFlags.RenderTarget | BindFlags.ShaderResource,
+                    Usage = ResourceUsage.Default,
+                    Format = Format.B8G8R8A8_UNorm,
+                    Width = 512,
+                    Height = 512,
+                    SampleDescription = new SampleDescription(1, 0),
+                    ArraySize = 1
+                });
+            _texture2D = Texture2D.New(GraphicsDevice, texture2D11);
+            _shaderResourceView = new ShaderResourceView(GraphicsDevice, _texture2D);
+            using (var queryInterface = texture2D11.QueryInterface<Resource1>())
+            using (Surface surface2 = new Surface2(queryInterface, 0)) {
+                _target = new Bitmap1(_service.DeviceContext, surface2);
+            }
+
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _brush = new SolidColorBrush(_service.DeviceContext, Color.DarkKhaki);
+
+
+            _commandList = new CommandList(context);
+            context.Target = _commandList;
+            using (context.Target) {
+                context.BeginDraw();
+                context.FillEllipse(new Ellipse(new Vector2(50, 50), 20, 20), _example3Brush2);
+                context.EndDraw();
+            }
+            _commandList.Close();
             base.LoadContent();
         }
+
 
         protected override void Update(GameTime time) {
             var t = (float) time.TotalGameTime.TotalMilliseconds;
@@ -164,10 +207,9 @@ namespace App1 {
 
             // Caution, when accessing context.Target, It must be disposed as the returned object is created everytime
             // we access the property, incrementing the reference counter on it
-            using (var target = context.Target)
-            {
-                if (context != null && target != null)
-                {
+            _service.SetDefaultDeviceContextTarget();
+            using (Image target = context.Target) {
+                if (context != null && target != null) {
                     context.BeginDraw();
                     // example 1
                     context.Transform = Matrix3x2.Translation(new Vector2(20.0f, 20.0f));
@@ -188,13 +230,46 @@ namespace App1 {
                 }
             }
 
+            context.Target = _target;
+            using (context.Target) {
+                context.BeginDraw();
+                context.Transform = Matrix3x2.Translation(new Vector2(5, 5));
+                // context.FillEllipse(new Ellipse(new Vector2(50, 50), 50, 50), _example3Brush2);
+                context.DrawImage(_commandList);
+                context.EndDraw();
+            }
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(_shaderResourceView, Vector2.Zero, Color.White);
+            _spriteBatch.End();
             /* Direct3D example */
             GraphicsDevice.SetVertexBuffer(_buffer);
             GraphicsDevice.SetVertexInputLayout(_bufferLayout);
             _basicEffect.CurrentTechnique.Passes[0].Apply();
             GraphicsDevice.Draw(PrimitiveType.TriangleList, _buffer.ElementCount);
 
+
             base.Draw(time);
+        }
+
+        public static SharpDX.Direct3D11.Texture2D CreateTexture2DFromBitmap(Device device, Bitmap1 bitmap) {
+            DataRectangle map = bitmap.Map(MapOptions.Read);
+            var desc = new Texture2DDescription {
+                Width = (int) bitmap.Size.Width,
+                Height = (int) bitmap.Size.Height,
+                ArraySize = 1,
+                BindFlags = BindFlags.ShaderResource,
+                Usage = ResourceUsage.Immutable,
+                CpuAccessFlags = CpuAccessFlags.None,
+                Format = Format.R8G8B8A8_UNorm,
+                MipLevels = 1,
+                OptionFlags = ResourceOptionFlags.None,
+                SampleDescription = new SampleDescription(1, 0),
+            };
+
+            // Allocate DataStream to receive the WIC image pixels                         
+            var texture = new SharpDX.Direct3D11.Texture2D(device, desc, map);
+            bitmap.Unmap();
+            return texture;
         }
     }
 }
