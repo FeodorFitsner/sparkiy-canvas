@@ -13,7 +13,9 @@ using Buffer = SharpDX.Toolkit.Graphics.Buffer;
 using CommandList = SharpDX.Direct2D1.CommandList;
 using Device = SharpDX.Direct3D11.Device;
 using DeviceContext = SharpDX.Direct2D1.DeviceContext;
+using Direct2DService = SharpDX.Toolkit.Graphics.Direct2DService;
 using Factory1 = SharpDX.DirectWrite.Factory1;
+using IDirect2DService = SharpDX.Toolkit.Graphics.IDirect2DService;
 using Image = SharpDX.Direct2D1.Image;
 using PixelFormat = SharpDX.WIC.PixelFormat;
 using Texture2D = SharpDX.Toolkit.Graphics.Texture2D;
@@ -207,7 +209,7 @@ namespace App1 {
 
             // Caution, when accessing context.Target, It must be disposed as the returned object is created everytime
             // we access the property, incrementing the reference counter on it
-            _service.SetDefaultDeviceContextTarget();
+            //_service.SetDefaultDeviceContextTarget();
             using (Image target = context.Target) {
                 if (context != null && target != null) {
                     context.BeginDraw();
