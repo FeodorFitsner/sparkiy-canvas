@@ -27,19 +27,19 @@ namespace App1 {
         private readonly GraphicsDeviceManager _graphicsDeviceManager;
         private readonly Direct2DService _service;
         private BasicEffect _basicEffect;
-        private SolidColorBrush _brush;
+        private Brush _brush;
         private Buffer<VertexPositionColor> _buffer;
         private VertexInputLayout _bufferLayout;
         private CommandList _commandList;
         private Bitmap1 _example1Bitmap;
-        private SolidColorBrush _example2Brush1;
-        private SolidColorBrush _example2Brush2;
+        private Brush _example2Brush1;
+        private Brush _example2Brush2;
         private Ellipse _example2Ellipse;
         private StrokeStyle _example2StrokeStyle;
-        private SolidColorBrush _example3Brush1;
+        private Brush _example3Brush1;
         private LinearGradientBrush _example3Brush2;
         private PathGeometry _example3Geometry;
-        private SolidColorBrush _example4Brush;
+        private Brush _example4Brush;
         private TextFormat _example4TextFormat;
         private ShaderResourceView _shaderResourceView;
         private SpriteBatch _spriteBatch;
@@ -176,6 +176,11 @@ namespace App1 {
                 context.EndDraw();
             }
             _commandList.Close();
+
+
+
+            var gameSystemCollection = GameSystems;
+
             base.LoadContent();
         }
 
@@ -243,6 +248,9 @@ namespace App1 {
             _spriteBatch.Begin();
             _spriteBatch.Draw(_shaderResourceView, Vector2.Zero, Color.White);
             _spriteBatch.End();
+
+
+
             /* Direct3D example */
             GraphicsDevice.SetVertexBuffer(_buffer);
             GraphicsDevice.SetVertexInputLayout(_bufferLayout);

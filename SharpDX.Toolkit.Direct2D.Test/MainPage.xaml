@@ -1,0 +1,31 @@
+﻿<Page x:Class="SharpDX.Toolkit.Direct2D.Test.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      KeyDown="MainPage_OnKeyDown"
+      KeyUp="MainPage_OnKeyUp"
+      mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <SwapChainPanel x:Name="SwapChainPanel1">
+            <RepeatButton Margin="5"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Bottom"
+                          AutomationProperties.AcceleratorKey="Alt P"
+                          Background="Black"
+                          Click="ButtonBase_OnClick"
+                          Foreground="White"
+                          Interval="10"
+                          ToolTipService.ToolTip="Shortcut key: Ctrl+P">
+                <RepeatButton.Content>
+                    <TextBlock>
+                        <Underline>P</Underline>ush shape
+                    </TextBlock>
+                </RepeatButton.Content>
+            </RepeatButton>
+
+
+        </SwapChainPanel>
+    </Grid>
+</Page>
