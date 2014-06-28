@@ -3,6 +3,13 @@ SharpDX.Toolkit.Game.Direct2D
 
 Provides Direct2D and DirectWrite to Toolkit's Game class
 
+**Current status:**
+
+It is going to be merged in the Toolkit once there's significant content, current *stuff* is in the Canvas* classes.
+
+Right now, lines, rectangles, ellipses and bitmaps are available.
+
+----
 
 This is an (unofficial) preliminary implementation that might eventually get integrated in the next iteration of the Toolkit.
 
