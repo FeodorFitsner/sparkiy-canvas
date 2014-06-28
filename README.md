@@ -7,7 +7,9 @@ Provides Direct2D and DirectWrite to Toolkit's Game class
 
 It is going to be merged in the Toolkit once there's significant content, current *stuff* is in the Canvas* classes.
 
-Right now, lines, rectangles, ellipses and bitmaps are available.
+Right now:
+- lines, rectangles, ellipses and bitmaps are available.
+- primitive caching system, works well but currently everything is drawn again when canvas is modified.
 
 ----
 
