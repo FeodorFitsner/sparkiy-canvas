@@ -5,13 +5,12 @@ Provides Direct2D and DirectWrite to Toolkit's Game class
 
 **Current status:**
 
-It is going to be merged in the Toolkit once there's significant content, current *stuff* is in the Canvas* classes.
+It is going to be merged in the Toolkit once there's significant content, current stuff is here: https://github.com/aybe/SharpDX.Toolkit.Game.Direct2D/tree/master/SharpDX.Toolkit.Direct2D.Test/Canvas
 
 Right now:
 - lines, rectangles, ellipses and bitmaps are available.
 - primitive caching system, works well but currently everything is drawn again when canvas is modified.
 
-(in SharpDX.Toolkit.Direct2D.Test project)
 
 ----
 
