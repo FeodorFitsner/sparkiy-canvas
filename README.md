@@ -12,6 +12,7 @@ Right now:
 - primitive caching system, works well but currently everything is drawn again when canvas is modified.
 
 (in SharpDX.Toolkit.Direct2D.Test project)
+
 ----
 
 This is an (unofficial) preliminary implementation that might eventually get integrated in the next iteration of the Toolkit.
