@@ -1,11 +1,13 @@
 ﻿using System;
 using SharpDX.Direct2D1;
 using SharpDX.Direct3D11;
+using SharpDX.DirectWrite;
 using SharpDX.Toolkit.Direct2D.Test.CanvasStub;
 using SharpDX.Toolkit.Graphics;
 using SharpDX.Toolkit.Input;
 using Buffer = SharpDX.Toolkit.Graphics.Buffer;
 using Effect = SharpDX.Toolkit.Graphics.Effect;
+using Factory = SharpDX.Direct2D1.Factory;
 using Texture2D = SharpDX.Toolkit.Graphics.Texture2D;
 
 namespace SharpDX.Toolkit.Direct2D.Test {
@@ -22,7 +24,8 @@ namespace SharpDX.Toolkit.Direct2D.Test {
         private Effect _effect;
         private Buffer<ushort> _indexBuffer;
         private SpriteBatch _spriteBatch;
-        private Texture2D _texture2D;
+        private Texture2D _texture1;
+        private Texture2D _texture2;
         private Buffer<VertexPositionColor> _vertexBuffer;
         private VertexInputLayout _vertexInputLayout;
         public Canvas Canvas { get; private set; }
@@ -50,6 +53,7 @@ namespace SharpDX.Toolkit.Direct2D.Test {
 
         protected override void LoadContent() {
             _effect = Content.Load<Effect>("Test.tkb");
+            _texture2 = Content.Load<Texture2D>("ghost.tkb");
             Load3DStuff();
             LoadCanvasStuff();
 
@@ -58,75 +62,69 @@ namespace SharpDX.Toolkit.Direct2D.Test {
 
         private void LoadCanvasStuff() {
             Canvas = new Canvas(this);
+            Brushes.Initialize(Canvas.DeviceContext);
 
-            var texture2D = Content.Load<Texture2D>("ghost.tkb");
+            Factory direct2DFactory = Canvas.Direct2DFactory;
+            DirectWrite.Factory directWriteFactory = Canvas.DirectWriteFactory;
 
 
+            // Line, rectangle, ellipse, bitmap
             Canvas.PushObject(new CanvasTransform(Matrix3x2.Translation(100.0f, 100.0f)));
             Canvas.PushObject(new CanvasLine(new Vector2(0.0f, 0.0f), new Vector2(100.0f, 90.0f),
-                Canvas.GetSolidColorBrush(Color.DeepSkyBlue), 5.0f));
+                Brushes.DeepSkyBlue, 5.0f));
             Canvas.PushObject(new CanvasLine(new Vector2(100.0f, 0.0f), new Vector2(200.0f, 90.0f),
-                Canvas.GetSolidColorBrush(Color.DeepPink), 5.0f));
+                Brushes.DeepPink, 5.0f));
             Canvas.PushObject(new CanvasRectangle(new RectangleF(0.0f, 100.0f, 90.0f, 90.0f),
-                Canvas.GetSolidColorBrush(Color.GhostWhite)));
+                Brushes.GhostWhite));
             Canvas.PushObject(new CanvasRectangle(new RectangleF(100.0f, 100.0f, 90.0f, 90.0f),
-                Canvas.GetSolidColorBrush(Color.DarkKhaki), true));
+                Brushes.DarkKhaki, true));
             Canvas.PushObject(new CanvasEllipse(new Ellipse(new Vector2(50.0f, 250.0f), 40.0f, 35.0f),
-                Canvas.GetSolidColorBrush(Color.Gold)));
+                Brushes.Gold));
             Canvas.PushObject(new CanvasEllipse(new Ellipse(new Vector2(150.0f, 250.0f), 40.0f, 35.0f),
-                Canvas.GetSolidColorBrush(Color.Orange), true));
+                Brushes.Orange, true));
             Canvas.PushObject(new CanvasTransform(Matrix3x2.Translation(200.0f, 400.0f)));
-            Canvas.PushObject(new CanvasBitmap(texture2D));
-            Factory factory = Canvas.Factory;
+            Canvas.PushObject(new CanvasBitmap(_texture2));
+
+            // Geometry
             Canvas.PushObject(
                 new CanvasGeometry(
-                    new RoundedRectangleGeometry(factory,
-                        new RoundedRectangle {RadiusX = 20, RadiusY = 20, Rect = new RectangleF(300, 300, 100, 100)})
-                    , Canvas.GetSolidColorBrush(Color.HotPink)));
+                    new RoundedRectangleGeometry(direct2DFactory,
+                        new RoundedRectangle {RadiusX = 20, RadiusY = 20, Rect = new RectangleF(300, 300, 100, 100)}),
+                    Brushes.HotPink));
 
             Canvas.PushObject(
                 new CanvasGeometry(
-                    new EllipseGeometry(factory, new Ellipse(new Vector2(400), 80, 80))
-                    , Canvas.GetSolidColorBrush(Color.HotPink)));
+                    new EllipseGeometry(direct2DFactory, new Ellipse(new Vector2(400), 80, 80))
+                    , Brushes.DeepPink));
 
-            //Canvas.PushObject(new CanvasMetafile(@"Content\AN00932_.WMF"));
+            // Text
+            Canvas.PushObject(new CanvasText("Hello world !", new TextFormat(directWriteFactory, "Arial", 20.0f),
+                new RectangleF(300, 300, 100, 100), Brushes.Green, DrawTextOptions.None, MeasuringMode.Natural));
+
+            Canvas.PushObject(new CanvasTextLayout(Vector2.Zero,
+                new TextLayout(directWriteFactory, "TextLayout",
+                    new TextFormat(directWriteFactory, "Segoe UI", 40.0f), 100.0f, 100.0f), Brushes.Gold,
+                DrawTextOptions.None));
+
+            // GlyphRun
+            //var systemFontCollection = Canvas.DirectWriteFactory.GetSystemFontCollection(true);
+            //int index;
+            //var findFamilyName = systemFontCollection.FindFamilyName("Arial", out index);
+            //if (findFamilyName)
+            //{
+            //    var fontFamily = systemFontCollection.GetFontFamily(index);
+            //    var font = fontFamily.GetFont(0);
+
+            //    GlyphRun glyphRun = new GlyphRun()
+            //    {
+            //        FontFace = new FontFace(font),
+            //        FontSize = 20,
+            //    };
+            //    GlyphRunDescription description = new GlyphRunDescription(){Text = "hey !"};
+            //    Canvas.PushObject(new CanvasGlyphRun(Vector2.Zero, glyphRun,description, Brushes.Red, MeasuringMode.Natural));
+            //}
 
             Canvas.PushObject(new CanvasTransform(Matrix3x2.Identity));
-
-            //  Canvas.ClearColor = Color.DeepPink.ChangeAlpha(0.1f);
-            //Brush brush1 = Canvas.GetSolidColorBrush(Color.PaleVioletRed);
-            //Brush brush2 = Canvas.GetSolidColorBrush(Color.Tan);
-            //Brush brush3 = Canvas.GetSolidColorBrush(Color.Purple);
-
-            //var styleProperties = new StrokeStyleProperties
-            //{
-            //    StartCap = CapStyle.Flat,
-            //    EndCap = CapStyle.Flat,
-            //    DashCap = CapStyle.Triangle,
-            //    LineJoin = LineJoin.Miter,
-            //    MiterLimit = 10.0f,
-            //    DashStyle = DashStyle.DashDotDot,
-            //    DashOffset = 0.0f
-            //};
-            //var strokeStyle = Canvas.GetStrokeStyle(styleProperties);
-
-
-            //RectangleDrawing rect1 = new RectangleDrawing(new RectangleF(10, 10, 200, 200), brush1, 5.0f, strokeStyle);
-            //RectangleDrawing rect3 = new RectangleDrawing(new RectangleF(300, 300, 100, 100), brush2);
-            //RectangleDrawing rect4 = new RectangleDrawing(new RectangleF(450, 450, 100, 100), brush3);
-            //Canvas.PushDrawing(rect1);
-            //Canvas.PushDrawing(rect3);
-            //Canvas.PushDrawing(rect4);
-
-            //RoundedRectangleDrawing roundedRectangleDrawing = new RoundedRectangleDrawing(new RoundedRectangle() { RadiusX = 5, RadiusY = 5, Rect = new RectangleF(200, 10, 100, 100) }, brush3);
-            //Canvas.PushDrawing(roundedRectangleDrawing);
-
-            //Brush brush4=Canvas.GetSolidColorBrush(Color.DeepPink);
-            //Drawing  drawing=new LineDrawing(new Vector2(50,50),new Vector2(150,240), brush4 ,10);
-            //Canvas.PushDrawing(drawing);
-
-
-            //Canvas.PushObject(new CanvasTransform(Matrix3x2.Translation(new Vector2(100.0f, 100.0f))));
         }
 
         private void Load3DStuff() {
@@ -181,7 +179,7 @@ namespace SharpDX.Toolkit.Direct2D.Test {
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _texture2D = Texture2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height,
+            _texture1 = Texture2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height,
                 GraphicsDevice.BackBuffer.Format);
         }
 
@@ -231,21 +229,21 @@ namespace SharpDX.Toolkit.Direct2D.Test {
 
             #region Copy of back buffer
 
-            if (_texture2D.Width != GraphicsDevice.BackBuffer.Width ||
-                _texture2D.Height != GraphicsDevice.BackBuffer.Height) {
-                _texture2D.Dispose();
-                _texture2D = Texture2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width,
+            if (_texture1.Width != GraphicsDevice.BackBuffer.Width ||
+                _texture1.Height != GraphicsDevice.BackBuffer.Height) {
+                _texture1.Dispose();
+                _texture1 = Texture2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width,
                     GraphicsDevice.BackBuffer.Height, GraphicsDevice.BackBuffer.Format);
             }
-            GraphicsDevice.Copy(GraphicsDevice.BackBuffer, _texture2D);
+            GraphicsDevice.Copy(GraphicsDevice.BackBuffer, _texture1);
             _spriteBatch.Begin(SpriteSortMode.Deferred, _effect);
-            //_spriteBatch.Draw(_texture2D, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 0.5f,
+            //_spriteBatch.Draw(_texture1, Vector2.Zero, null, Color.White, 0, Vector2.Zero, 0.5f,
             //    SpriteEffects.None, 0);
 
-            _spriteBatch.Draw(_texture2D, new Rectangle(0, 0, _texture2D.Width/2, _texture2D.Height),
-                new Rectangle(0, 0, _texture2D.Width/2, _texture2D.Height), Color.White);
+            _spriteBatch.Draw(_texture1, new Rectangle(0, 0, _texture1.Width/2, _texture1.Height),
+                new Rectangle(0, 0, _texture1.Width/2, _texture1.Height), Color.White);
 
-            //_spriteBatch.Draw(_texture2D,Vector2.Zero, Color.White);
+            //_spriteBatch.Draw(_texture1,Vector2.Zero, Color.White);
             _spriteBatch.End();
 
             #endregion

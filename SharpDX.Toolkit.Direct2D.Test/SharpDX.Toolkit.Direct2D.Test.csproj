@@ -105,21 +105,24 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CanvasStub\Brushes.cs" />
     <Compile Include="CanvasStub\CanvasBitmap.cs" />
     <Compile Include="CanvasStub\CanvasDrawing.cs" />
     <Compile Include="CanvasStub\CanvasEllipse.cs" />
     <Compile Include="CanvasStub\CanvasGeometry.cs" />
+    <Compile Include="CanvasStub\CanvasGlyphRun.cs" />
     <Compile Include="CanvasStub\CanvasLine.cs" />
     <Compile Include="CanvasStub\CanvasMetafile.cs" />
     <Compile Include="CanvasStub\CanvasObject.cs" />
     <Compile Include="CanvasStub\CanvasRectangle.cs" />
     <Compile Include="CanvasStub\CanvasRoundedRectangle.cs" />
     <Compile Include="CanvasStub\CanvasState.cs" />
+    <Compile Include="CanvasStub\CanvasText.cs" />
+    <Compile Include="CanvasStub\CanvasTextLayout.cs" />
     <Compile Include="CanvasStub\CanvasTransform.cs" />
-    <Compile Include="CanvasStub\Unused\IBrushDrawing.cs" />
-    <Compile Include="CanvasStub\Unused\IDeviceContext1.cs" />
-    <Compile Include="CanvasStub\Unused\IDrawing.cs" />
-    <Compile Include="CanvasStub\Unused\IStrokeDrawing.cs" />
+    <Compile Include="Unused\IBrushDrawing.cs" />
+    <Compile Include="Unused\IDrawing.cs" />
+    <Compile Include="Unused\IStrokeDrawing.cs" />
     <Compile Include="Extras\ColorExtensions.cs" />
     <Compile Include="Extras\ComObjectExtensions.cs" />
     <Compile Include="MyGame.cs" />

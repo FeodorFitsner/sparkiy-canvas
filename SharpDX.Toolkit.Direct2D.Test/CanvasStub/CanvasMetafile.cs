@@ -12,21 +12,21 @@ namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
 
         public CanvasMetafile(string fileName, Vector2? targetOffset = null) {
             throw new NotImplementedException();
-            if (fileName == null) throw new ArgumentNullException("fileName");
-            _fileName = fileName;
-            TargetOffset = targetOffset;
-            using (var imagingFactory = new ImagingFactory())
-            using (var nativeFileStream = new NativeFileStream(fileName, NativeFileMode.Open, NativeFileAccess.Read))
-            using (var stream = new WICStream(imagingFactory, nativeFileStream)) {
-                //  _gdiMetafile = new GdiMetafile(stream.NativePointer);
+            //if (fileName == null) throw new ArgumentNullException("fileName");
+            //_fileName = fileName;
+            //TargetOffset = targetOffset;
+            //using (var imagingFactory = new ImagingFactory())
+            //using (var nativeFileStream = new NativeFileStream(fileName, NativeFileMode.Open, NativeFileAccess.Read))
+            //using (var stream = new WICStream(imagingFactory, nativeFileStream)) {
+            //    //  _gdiMetafile = new GdiMetafile(stream.NativePointer);
 
-                TypeInfo typeInfo = nativeFileStream.GetType().GetTypeInfo();
-                FieldInfo[] fieldInfos = typeInfo.DeclaredFields.ToArray();
-                FieldInfo fieldInfo = fieldInfos[3];
-                object value = fieldInfo.GetValue(nativeFileStream);
-                var intPtr = (IntPtr) value;
-                _gdiMetafile = new GdiMetafile(intPtr);
-            }
+            //    TypeInfo typeInfo = nativeFileStream.GetType().GetTypeInfo();
+            //    FieldInfo[] fieldInfos = typeInfo.DeclaredFields.ToArray();
+            //    FieldInfo fieldInfo = fieldInfos[3];
+            //    object value = fieldInfo.GetValue(nativeFileStream);
+            //    var intPtr = (IntPtr) value;
+            //    _gdiMetafile = new GdiMetafile(intPtr);
+            //}
         }
 
         public string FileName {

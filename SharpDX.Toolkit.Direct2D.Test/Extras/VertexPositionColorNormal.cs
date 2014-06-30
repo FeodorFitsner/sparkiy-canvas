@@ -5,44 +5,38 @@ namespace SharpDX.Toolkit.Direct2D.Test.Extras {
     public struct VertexPositionColorNormal //: IEquatable<VertexPositionColorNormal>
         : IEquatable<VertexPositionColorNormal> {
         /// <summary>
-        /// Defines structure byte size.
-        /// 
+        ///     Defines structure byte size.
         /// </summary>
         public static readonly int Size = 28;
-        /// <summary>
-        /// XYZ position.
-        /// 
-        /// </summary>
-        [VertexElement("SV_Position")]
-        public Vector3 Position;
-        /// <summary>
-        /// The vertex color.
-        /// 
-        /// </summary>
-        [VertexElement("COLOR")]
-        public Color Color;
-        /// <summary>
-        /// The vertex normal.
-        /// 
-        /// </summary>
-        [VertexElement("NORMAL")]
-        public Vector3 Normal;
 
-        static VertexPositionColorNormal()
-        {
+        /// <summary>
+        ///     The vertex color.
+        /// </summary>
+        [VertexElement("COLOR")] public Color Color;
+
+        /// <summary>
+        ///     The vertex normal.
+        /// </summary>
+        [VertexElement("NORMAL")] public Vector3 Normal;
+
+        /// <summary>
+        ///     XYZ position.
+        /// </summary>
+        [VertexElement("SV_Position")] public Vector3 Position;
+
+        static VertexPositionColorNormal() {
         }
 
         /// <summary>
-        /// Initializes a new <see cref="T:SharpDX.Toolkit.Graphics.VertexPositionColor"/> instance.
-        /// 
+        ///     Initializes a new <see cref="T:SharpDX.Toolkit.Graphics.VertexPositionColor" /> instance.
         /// </summary>
-        /// <param name="position">The position of this vertex.</param><param name="color">The color of this vertex.</param>
-        public VertexPositionColorNormal(Vector3 position, Vector3 normal, Color color)
-        {
-            this = new VertexPositionColorNormal(); 
-            this.Position = position;
+        /// <param name="position">The position of this vertex.</param>
+        /// <param name="color">The color of this vertex.</param>
+        public VertexPositionColorNormal(Vector3 position, Vector3 normal, Color color) {
+            this = new VertexPositionColorNormal();
+            Position = position;
             Normal = normal;
-            this.Color = color;
+            Color = color;
         }
 
         public bool Equals(VertexPositionColorNormal other) {
@@ -56,7 +50,7 @@ namespace SharpDX.Toolkit.Direct2D.Test.Extras {
 
         public override int GetHashCode() {
             unchecked {
-                var hashCode = Position.GetHashCode();
+                int hashCode = Position.GetHashCode();
                 hashCode = (hashCode*397) ^ Color.GetHashCode();
                 hashCode = (hashCode*397) ^ Normal.GetHashCode();
                 return hashCode;

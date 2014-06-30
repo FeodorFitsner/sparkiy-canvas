@@ -46,9 +46,11 @@ namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
             _objects = new List<CanvasObject>();
             State = CanvasState.Refresh;
             _queue = new Queue<CanvasObject>();
+
+
         }
 
-        public Factory Factory {
+        public Factory Direct2DFactory {
             get { return _service.Device.Factory; }
         }
 
@@ -62,7 +64,7 @@ namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
             RenderTarget2D backBuffer = graphicsDevice.BackBuffer;
             _renderTarget2D =
                 ToDispose(RenderTarget2D.New(graphicsDevice, backBuffer.Width, backBuffer.Height, backBuffer.Format));
-            _bitmap1 = ToDispose(new Bitmap1(Context, _renderTarget2D));
+            _bitmap1 = ToDispose(new Bitmap1(DeviceContext, _renderTarget2D));
 
 
             State = CanvasState.Refresh;
@@ -72,10 +74,10 @@ namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
 
         #region Private properties
 
-        internal DeviceContext Context {
+        internal DeviceContext DeviceContext {
             get { return _service.DeviceContext; }
         }
-
+        public DirectWrite.Factory DirectWriteFactory { get { return _service.DirectWriteFactory; } }
         private CanvasState State { get; set; }
 
         #endregion
@@ -94,24 +96,24 @@ namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
         }
 
         public SolidColorBrush GetSolidColorBrush(Color color) {
-            return ToDispose(new SolidColorBrush(Context, color));
+            return ToDispose(new SolidColorBrush(DeviceContext, color));
         }
 
         public StrokeStyle GetStrokeStyle(StrokeStyleProperties strokeStyleProperties, float[] dashes) {
             throw new NotImplementedException();
-            if (dashes == null) throw new ArgumentNullException("dashes");
-            return ToDispose(new StrokeStyle(Context.Factory, strokeStyleProperties, dashes));
+            //if (dashes == null) throw new ArgumentNullException("dashes");
+            //return ToDispose(new StrokeStyle(DeviceContext.Factory, strokeStyleProperties, dashes));
         }
 
         public StrokeStyle GetStrokeStyle(StrokeStyleProperties strokeStyleProperties) {
-            return ToDispose(new StrokeStyle(Context.Factory, strokeStyleProperties));
+            return ToDispose(new StrokeStyle(DeviceContext.Factory, strokeStyleProperties));
         }
 
         public void PushObject(CanvasObject canvasObject) {
             if (canvasObject == null) throw new ArgumentNullException("canvasObject");
             bool isInitialized = canvasObject.IsInitialized;
             if (!isInitialized) {
-                canvasObject.Initialize(Context);
+                canvasObject.Initialize(DeviceContext);
             }
             _objects.Add(canvasObject);
             _queue.Enqueue(canvasObject);
@@ -129,29 +131,29 @@ namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
             if (_bitmap1 == null || _renderTarget2D == null) return;
             switch (State) {
                 case CanvasState.Append:
-                    Context.Target = _bitmap1;
-                    using (Context.Target) {
-                        Context.BeginDraw();
+                    DeviceContext.Target = _bitmap1;
+                    using (DeviceContext.Target) {
+                        DeviceContext.BeginDraw();
                         while (_queue.Count > 0) {
                             CanvasObject o = _queue.Dequeue();
-                            o.DoWork(Context);
+                            o.DoWork(DeviceContext);
                         }
-                        Context.EndDraw();
+                        DeviceContext.EndDraw();
                     }
-                    Context.Target = null;
+                    DeviceContext.Target = null;
                     State = CanvasState.Cache;
                     break;
                 case CanvasState.Refresh:
-                    Context.Target = _bitmap1;
-                    using (Context.Target) {
-                        Context.BeginDraw();
-                        Context.Clear(ClearColor);
+                    DeviceContext.Target = _bitmap1;
+                    using (DeviceContext.Target) {
+                        DeviceContext.BeginDraw();
+                        DeviceContext.Clear(ClearColor);
                         foreach (CanvasObject o in _objects) {
-                            o.DoWork(Context);
+                            o.DoWork(DeviceContext);
                         }
-                        Context.EndDraw();
+                        DeviceContext.EndDraw();
                     }
-                    Context.Target = null;
+                    DeviceContext.Target = null;
                     State = CanvasState.Cache;
                     break;
                 case CanvasState.Cache:
