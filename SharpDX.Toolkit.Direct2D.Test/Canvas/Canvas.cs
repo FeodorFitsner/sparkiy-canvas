@@ -11,15 +11,14 @@ using System.Collections.Generic;
 using SharpDX.Direct2D1;
 using SharpDX.Toolkit.Graphics;
 
-namespace SharpDX.Toolkit.Direct2D.Test.Canvas
-{
-    public class Canvas : Component
-    {
+namespace SharpDX.Toolkit.Direct2D.Test.Canvas {
+    public class Canvas : Component {
         #region Private fields
 
         private readonly Game _game;
         private readonly GraphicsDeviceManager _graphicsDeviceManager;
         private readonly List<CanvasObject> _objects;
+        private readonly Queue<CanvasObject> _queue;
         private readonly IDirect2DService _service;
         private readonly SpriteBatch _spriteBatch;
         private Bitmap1 _bitmap1;
@@ -29,15 +28,14 @@ namespace SharpDX.Toolkit.Direct2D.Test.Canvas
 
         #region Public constructor
 
-        public Canvas(Game game)
-        {
+        public Canvas(Game game) {
             if (game == null) throw new ArgumentNullException("game");
             _game = game;
 
 
             // TODO : check that game has the services
             _service = game.Services.GetService<IDirect2DService>();
-            _graphicsDeviceManager = (GraphicsDeviceManager)game.Services.GetService<IGraphicsDeviceManager>();
+            _graphicsDeviceManager = (GraphicsDeviceManager) game.Services.GetService<IGraphicsDeviceManager>();
             _graphicsDeviceManager.DeviceChangeBegin += _graphicsDeviceManager_DeviceChangeBegin;
             _graphicsDeviceManager.DeviceChangeEnd += _graphicsDeviceManager_DeviceChangeEnd;
 
@@ -47,17 +45,16 @@ namespace SharpDX.Toolkit.Direct2D.Test.Canvas
             // Set default values for this class
             _objects = new List<CanvasObject>();
             State = CanvasState.Refresh;
+            _queue = new Queue<CanvasObject>();
         }
 
 
-        private void _graphicsDeviceManager_DeviceChangeBegin(object sender, EventArgs e)
-        {
+        private void _graphicsDeviceManager_DeviceChangeBegin(object sender, EventArgs e) {
             RemoveAndDispose(ref _renderTarget2D);
             RemoveAndDispose(ref _bitmap1);
         }
 
-        private void _graphicsDeviceManager_DeviceChangeEnd(object sender, EventArgs e)
-        {
+        private void _graphicsDeviceManager_DeviceChangeEnd(object sender, EventArgs e) {
             GraphicsDevice graphicsDevice = _game.GraphicsDevice;
             RenderTarget2D backBuffer = graphicsDevice.BackBuffer;
             _renderTarget2D =
@@ -72,8 +69,7 @@ namespace SharpDX.Toolkit.Direct2D.Test.Canvas
 
         #region Private properties
 
-        internal DeviceContext Context
-        {
+        internal DeviceContext Context {
             get { return _service.DeviceContext; }
         }
 
@@ -89,62 +85,65 @@ namespace SharpDX.Toolkit.Direct2D.Test.Canvas
 
         #region Public methods
 
-        public void Clear()
-        {
+        public void Clear() {
             State = CanvasState.Refresh;
             _objects.Clear();
         }
 
-        public SolidColorBrush GetSolidColorBrush(Color color)
-        {
+        public SolidColorBrush GetSolidColorBrush(Color color) {
             return ToDispose(new SolidColorBrush(Context, color));
         }
 
-        public StrokeStyle GetStrokeStyle(StrokeStyleProperties strokeStyleProperties, float[] dashes)
-        {
+        public StrokeStyle GetStrokeStyle(StrokeStyleProperties strokeStyleProperties, float[] dashes) {
             throw new NotImplementedException();
             if (dashes == null) throw new ArgumentNullException("dashes");
             return ToDispose(new StrokeStyle(Context.Factory, strokeStyleProperties, dashes));
         }
 
-        public StrokeStyle GetStrokeStyle(StrokeStyleProperties strokeStyleProperties)
-        {
+        public StrokeStyle GetStrokeStyle(StrokeStyleProperties strokeStyleProperties) {
             return ToDispose(new StrokeStyle(Context.Factory, strokeStyleProperties));
         }
 
-        public void PushObject(CanvasObject canvasObject)
-        {
+        public void PushObject(CanvasObject canvasObject) {
             if (canvasObject == null) throw new ArgumentNullException("canvasObject");
-            var isInitialized = canvasObject.IsInitialized;
-            if (!isInitialized)
-            {
+            bool isInitialized = canvasObject.IsInitialized;
+            if (!isInitialized) {
                 canvasObject.Initialize(Context);
             }
             _objects.Add(canvasObject);
-            State = CanvasState.Refresh;
+            _queue.Enqueue(canvasObject);
+
+            State = CanvasState.Append;
         }
 
-        public void PushObjects(params CanvasObject[] canvasObjects)
-        {
+        public void PushObjects(params CanvasObject[] canvasObjects) {
             throw new NotImplementedException();
             if (canvasObjects == null) throw new ArgumentNullException("canvasObjects");
             _objects.AddRange(canvasObjects);
         }
 
-        public void Render() // TODO append newest objects
-        {
+        public void Render() {
             if (_bitmap1 == null || _renderTarget2D == null) return;
-
-            switch (State)
-            {
+            switch (State) {
+                case CanvasState.Append:
+                    Context.Target = _bitmap1;
+                    using (Context.Target) {
+                        Context.BeginDraw();
+                        while (_queue.Count > 0) {
+                            CanvasObject o = _queue.Dequeue();
+                            o.DoWork(Context);
+                        }
+                        Context.EndDraw();
+                    }
+                    Context.Target = null;
+                    State = CanvasState.Cache;
+                    break;
                 case CanvasState.Refresh:
                     Context.Target = _bitmap1;
-                    using (Context.Target)
-                    {
+                    using (Context.Target) {
                         Context.BeginDraw();
                         Context.Clear(ClearColor);
-                        foreach (CanvasObject o in _objects)
-                        {
+                        foreach (CanvasObject o in _objects) {
                             o.DoWork(Context);
                         }
                         Context.EndDraw();

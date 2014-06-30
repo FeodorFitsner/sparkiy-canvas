@@ -2,5 +2,6 @@
     public enum CanvasState {
         Cache,
         Refresh,
+        Append
     }
 }
