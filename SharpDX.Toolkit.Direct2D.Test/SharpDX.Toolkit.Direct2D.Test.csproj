@@ -105,22 +105,25 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Canvas\CanvasBitmap.cs" />
-    <Compile Include="Canvas\CanvasDrawing.cs" />
-    <Compile Include="Canvas\CanvasEllipse.cs" />
-    <Compile Include="Canvas\CanvasLine.cs" />
-    <Compile Include="Canvas\CanvasObject.cs" />
-    <Compile Include="Canvas\CanvasRectangle.cs" />
-    <Compile Include="Canvas\CanvasRoundedRectangle.cs" />
-    <Compile Include="Canvas\CanvasState.cs" />
-    <Compile Include="Canvas\CanvasTransform.cs" />
-    <Compile Include="Canvas\Unused\IBrushDrawing.cs" />
-    <Compile Include="Canvas\Unused\IDeviceContext1.cs" />
-    <Compile Include="Canvas\Unused\IDrawing.cs" />
-    <Compile Include="Canvas\Unused\IStrokeDrawing.cs" />
+    <Compile Include="CanvasStub\CanvasBitmap.cs" />
+    <Compile Include="CanvasStub\CanvasDrawing.cs" />
+    <Compile Include="CanvasStub\CanvasEllipse.cs" />
+    <Compile Include="CanvasStub\CanvasGeometry.cs" />
+    <Compile Include="CanvasStub\CanvasLine.cs" />
+    <Compile Include="CanvasStub\CanvasMetafile.cs" />
+    <Compile Include="CanvasStub\CanvasObject.cs" />
+    <Compile Include="CanvasStub\CanvasRectangle.cs" />
+    <Compile Include="CanvasStub\CanvasRoundedRectangle.cs" />
+    <Compile Include="CanvasStub\CanvasState.cs" />
+    <Compile Include="CanvasStub\CanvasTransform.cs" />
+    <Compile Include="CanvasStub\Unused\IBrushDrawing.cs" />
+    <Compile Include="CanvasStub\Unused\IDeviceContext1.cs" />
+    <Compile Include="CanvasStub\Unused\IDrawing.cs" />
+    <Compile Include="CanvasStub\Unused\IStrokeDrawing.cs" />
     <Compile Include="Extras\ColorExtensions.cs" />
+    <Compile Include="Extras\ComObjectExtensions.cs" />
     <Compile Include="MyGame.cs" />
-    <Compile Include="Canvas\Canvas.cs" />
+    <Compile Include="CanvasStub\Canvas.cs" />
     <Compile Include="DemoSurface.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -140,6 +143,13 @@
     <Content Include="Assets\SmallLogo.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Content\AN00932_.WMF">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\J0234000.WMF">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <ToolkitFxc Include="Content\Test.fx" />
     <ToolkitTexture Include="Content\ghost.png" />
   </ItemGroup>
   <ItemGroup>

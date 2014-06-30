@@ -31,78 +31,78 @@
   <Class Name="SharpDX.Toolkit.Direct2D.Test.MyGame" Collapsed="true">
     <Position X="21.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABRAAAAAAAAAAgAAAAIAgQAgAAABYgAAAIAAQACAgAU=</HashCode>
+      <HashCode>ABRAAAAAAAAAAgAAAAIAgQQgAAABYgAAAoAAQACAgAU=</HashCode>
       <FileName>MyGame.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SharpDX.Toolkit.Direct2D.Test.Canvas.Canvas">
+  <Class Name="SharpDX.Toolkit.Direct2D.Test.CanvasStub.Canvas">
     <Position X="15.25" Y="4.5" Width="3.25" />
     <TypeIdentifier>
-      <HashCode>AABAAIAAAwIAAAAQAAAAAAAAAAAAAAgAIJCBBCBAAEQ=</HashCode>
-      <FileName>Canvas\Canvas.cs</FileName>
+      <HashCode>AABAAIAAAwIAAAAQMAAAAAAAAAAAAAgAIJCBBCBAAEQ=</HashCode>
+      <FileName>CanvasStub\Canvas.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Field Name="_objects" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="SharpDX.Toolkit.Direct2D.Test.Canvas.CanvasBitmap">
+  <Class Name="SharpDX.Toolkit.Direct2D.Test.CanvasStub.CanvasBitmap">
     <Position X="5.75" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ABAAAAAAACQAAQAAAEAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
-      <FileName>Canvas\CanvasBitmap.cs</FileName>
+      <FileName>CanvasStub\CanvasBitmap.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SharpDX.Toolkit.Direct2D.Test.Canvas.CanvasDrawing">
+  <Class Name="SharpDX.Toolkit.Direct2D.Test.CanvasStub.CanvasDrawing">
     <Position X="8.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Canvas\CanvasDrawing.cs</FileName>
+      <FileName>CanvasStub\CanvasDrawing.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SharpDX.Toolkit.Direct2D.Test.Canvas.CanvasLine">
+  <Class Name="SharpDX.Toolkit.Direct2D.Test.CanvasStub.CanvasLine">
     <Position X="13" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAQAgAKAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Canvas\CanvasLine.cs</FileName>
+      <FileName>CanvasStub\CanvasLine.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SharpDX.Toolkit.Direct2D.Test.Canvas.CanvasObject">
+  <Class Name="SharpDX.Toolkit.Direct2D.Test.CanvasStub.CanvasObject">
     <Position X="7" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAQAAQAAAEAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
-      <FileName>Canvas\CanvasObject.cs</FileName>
+      <FileName>CanvasStub\CanvasObject.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SharpDX.Toolkit.Direct2D.Test.Canvas.CanvasRoundedRectangle">
+  <Class Name="SharpDX.Toolkit.Direct2D.Test.CanvasStub.CanvasRoundedRectangle">
     <Position X="8" Y="9" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAQAAAKEAEAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
-      <FileName>Canvas\CanvasRoundedRectangle.cs</FileName>
+      <FileName>CanvasStub\CanvasRoundedRectangle.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SharpDX.Toolkit.Direct2D.Test.Canvas.CanvasTransform">
+  <Class Name="SharpDX.Toolkit.Direct2D.Test.CanvasStub.CanvasTransform">
     <Position X="1.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAQAAAAEAEAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Canvas\CanvasTransform.cs</FileName>
+      <FileName>CanvasStub\CanvasTransform.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SharpDX.Component">
     <Position X="8.75" Y="0.5" Width="2.25" />
     <TypeIdentifier />
   </Class>
-  <Class Name="SharpDX.Toolkit.Direct2D.Test.Canvas.CanvasEllipse">
-    <Position X="3.5" Y="9" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAgCAAQAAAKEAEAAAAAAAAAACAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Canvas\CanvasEllipse.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="SharpDX.Toolkit.Direct2D.Test.Canvas.CanvasRectangle">
+  <Class Name="SharpDX.Toolkit.Direct2D.Test.CanvasStub.CanvasRectangle">
     <Position X="10.75" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAQAAAKEAEAAAAAAAAAACAAAAAAAAAAAAgA=</HashCode>
-      <FileName>Canvas\CanvasRectangle.cs</FileName>
+      <FileName>CanvasStub\CanvasRectangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SharpDX.Toolkit.Direct2D.Test.CanvasStub.CanvasGeometry">
+    <Position X="3.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAQAAAKEAEAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>CanvasStub\CanvasGeometry.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Struct Name="SharpDX.Toolkit.Direct2D.Test.Extras.VertexPositionColorNormal" Collapsed="true" BaseTypeListCollapsed="true">
@@ -113,39 +113,39 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Struct>
-  <Interface Name="SharpDX.Toolkit.Direct2D.Test.Canvas.Unused.IBrushDrawing">
+  <Interface Name="SharpDX.Toolkit.Direct2D.Test.CanvasStub.Unused.IBrushDrawing">
     <Position X="2.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Canvas\Unused\IBrushDrawing.cs</FileName>
+      <FileName>CanvasStub\Unused\IBrushDrawing.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="SharpDX.Toolkit.Direct2D.Test.Canvas.Unused.IDeviceContext1" Collapsed="true">
+  <Interface Name="SharpDX.Toolkit.Direct2D.Test.CanvasStub.Unused.IDeviceContext1" Collapsed="true">
     <Position X="19.5" Y="4" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gBIACUCUQHAwggCAZAABhjUEACMCgIghIMcGMAhKAqQ=</HashCode>
-      <FileName>Canvas\Unused\IDeviceContext1.cs</FileName>
+      <FileName>CanvasStub\Unused\IDeviceContext1.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="SharpDX.Toolkit.Direct2D.Test.Canvas.Unused.IDrawing">
+  <Interface Name="SharpDX.Toolkit.Direct2D.Test.CanvasStub.Unused.IDrawing">
     <Position X="1.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Canvas\Unused\IDrawing.cs</FileName>
+      <FileName>CanvasStub\Unused\IDrawing.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="SharpDX.Toolkit.Direct2D.Test.Canvas.Unused.IStrokeDrawing">
+  <Interface Name="SharpDX.Toolkit.Direct2D.Test.CanvasStub.Unused.IStrokeDrawing">
     <Position X="0.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAgAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Canvas\Unused\IStrokeDrawing.cs</FileName>
+      <FileName>CanvasStub\Unused\IStrokeDrawing.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Enum Name="SharpDX.Toolkit.Direct2D.Test.Canvas.CanvasState" Collapsed="true">
+  <Enum Name="SharpDX.Toolkit.Direct2D.Test.CanvasStub.CanvasState" Collapsed="true">
     <Position X="19.5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAgAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Canvas\CanvasState.cs</FileName>
+      <HashCode>AAAAAAAgAABAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>CanvasStub\CanvasState.cs</FileName>
     </TypeIdentifier>
   </Enum>
   <Font Name="Segoe UI" Size="9" />

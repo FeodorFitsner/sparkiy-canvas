@@ -1,7 +1,7 @@
 using System;
 using SharpDX.Direct2D1;
 
-namespace SharpDX.Toolkit.Direct2D.Test.Canvas {
+namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
     public sealed class CanvasLine : CanvasDrawing {
         // TODO abstract base that has stroke and brush ??
 

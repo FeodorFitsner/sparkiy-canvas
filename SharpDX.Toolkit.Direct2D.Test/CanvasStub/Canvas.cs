@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using SharpDX.Direct2D1;
 using SharpDX.Toolkit.Graphics;
 
-namespace SharpDX.Toolkit.Direct2D.Test.Canvas {
+namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
     public class Canvas : Component {
         #region Private fields
 
@@ -48,6 +48,9 @@ namespace SharpDX.Toolkit.Direct2D.Test.Canvas {
             _queue = new Queue<CanvasObject>();
         }
 
+        public Factory Factory {
+            get { return _service.Device.Factory; }
+        }
 
         private void _graphicsDeviceManager_DeviceChangeBegin(object sender, EventArgs e) {
             RemoveAndDispose(ref _renderTarget2D);
