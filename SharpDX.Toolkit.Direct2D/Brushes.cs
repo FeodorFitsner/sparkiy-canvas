@@ -1,6 +1,6 @@
 using SharpDX.Direct2D1;
 
-namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub
+namespace SharpDX.Toolkit.Direct2D
 {
     public static class Brushes
     {

@@ -11,8 +11,8 @@ using System.Collections.Generic;
 using SharpDX.Direct2D1;
 using SharpDX.Toolkit.Graphics;
 
-namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
-    public class Canvas : Component {
+namespace SharpDX.Toolkit.Direct2D {
+	public class Canvas : Component {
         #region Private fields
 
         private readonly Game _game;
@@ -75,9 +75,9 @@ namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
         #region Private properties
 
         internal DeviceContext DeviceContext {
-            get { return _service.DeviceContext; }
+            get { return _service.Context; }
         }
-        public DirectWrite.Factory DirectWriteFactory { get { return _service.DirectWriteFactory; } }
+        public DirectWrite.Factory DirectWriteFactory { get { return _service.DwFactory; } }
         private CanvasState State { get; set; }
 
         #endregion

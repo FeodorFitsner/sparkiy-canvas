@@ -3,7 +3,7 @@ using SharpDX.Direct2D1;
 using SharpDX.DXGI;
 using SharpDX.Toolkit.Graphics;
 
-namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
+namespace SharpDX.Toolkit.Direct2D {
     public sealed class CanvasBitmap : CanvasDrawing {
         private readonly Texture2D _texture2D;
         private Bitmap1 _bitmap1;

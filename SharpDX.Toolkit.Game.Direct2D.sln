@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C631AEDE-727B-4155-BEEC-5CC38CCE85AB}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,6 +17,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpDX.Toolkit.Direct2D.Test", "SharpDX.Toolkit.Direct2D.Test\SharpDX.Toolkit.Direct2D.Test.csproj", "{0AC80291-0257-40D1-B179-D2DAAA3C3C6D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Old stuff", "Old stuff", "{C084562B-CF69-4F0C-AF6F-B73ED0BAF994}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{38FF616F-5029-4B82-9182-875D6A90254D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharpDX.Toolkit.Direct2D", "SharpDX.Toolkit.Direct2D\SharpDX.Toolkit.Direct2D.csproj", "{76C266AE-873F-490A-9124-DB60916D0F95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,6 +98,16 @@ Global
 		{0AC80291-0257-40D1-B179-D2DAAA3C3C6D}.Release|x86.ActiveCfg = Release|x86
 		{0AC80291-0257-40D1-B179-D2DAAA3C3C6D}.Release|x86.Build.0 = Release|x86
 		{0AC80291-0257-40D1-B179-D2DAAA3C3C6D}.Release|x86.Deploy.0 = Release|x86
+		{76C266AE-873F-490A-9124-DB60916D0F95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76C266AE-873F-490A-9124-DB60916D0F95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76C266AE-873F-490A-9124-DB60916D0F95}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{76C266AE-873F-490A-9124-DB60916D0F95}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{76C266AE-873F-490A-9124-DB60916D0F95}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{76C266AE-873F-490A-9124-DB60916D0F95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76C266AE-873F-490A-9124-DB60916D0F95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76C266AE-873F-490A-9124-DB60916D0F95}.Release|ARM.ActiveCfg = Release|Any CPU
+		{76C266AE-873F-490A-9124-DB60916D0F95}.Release|x64.ActiveCfg = Release|Any CPU
+		{76C266AE-873F-490A-9124-DB60916D0F95}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,5 +115,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{ABB314B6-C299-4F32-8E0C-C16DDDFE9A2A} = {C084562B-CF69-4F0C-AF6F-B73ED0BAF994}
 		{1AAE41BD-B069-4535-96CC-C22A10EF6DDF} = {C084562B-CF69-4F0C-AF6F-B73ED0BAF994}
+		{0AC80291-0257-40D1-B179-D2DAAA3C3C6D} = {38FF616F-5029-4B82-9182-875D6A90254D}
 	EndGlobalSection
 EndGlobal

@@ -2,7 +2,6 @@
 using SharpDX.Direct2D1;
 using SharpDX.Direct3D11;
 using SharpDX.DirectWrite;
-using SharpDX.Toolkit.Direct2D.Test.CanvasStub;
 using SharpDX.Toolkit.Graphics;
 using SharpDX.Toolkit.Input;
 using Buffer = SharpDX.Toolkit.Graphics.Buffer;

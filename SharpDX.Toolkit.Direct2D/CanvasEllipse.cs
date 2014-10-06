@@ -1,11 +1,11 @@
 using System;
 using SharpDX.Direct2D1;
 
-namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
-    public sealed class CanvasRectangle : CanvasDrawing {
-        public CanvasRectangle(RectangleF bounds, Brush brush, bool fill = false, float strokeWidth = 1.0f,
+namespace SharpDX.Toolkit.Direct2D {
+    public sealed class CanvasEllipse : CanvasDrawing {
+        public CanvasEllipse(Ellipse ellipse, Brush brush, bool fill = false, float strokeWidth = 1.0f,
             StrokeStyle strokeStyle = null) {
-            Bounds = bounds;
+            Ellipse = ellipse;
             Brush = brush;
             Fill = fill;
             StrokeWidth = strokeWidth;
@@ -13,24 +13,25 @@ namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
         }
 
         public Brush Brush { get; set; }
+
         public bool Fill { get; set; }
 
-        public RectangleF Bounds { get; set; }
+        public Ellipse Ellipse { get; set; }
 
         public float StrokeWidth { get; set; }
 
         public StrokeStyle StrokeStyle { get; set; }
 
         public override string ToString() {
-            return string.Format("geometry: {0}, StrokeWidth: {1}", Bounds, StrokeWidth);
+            return string.Format("geometry: {0}, StrokeWidth: {1}", Ellipse, StrokeWidth);
         }
 
         internal override void DoWork(DeviceContext context) {
             if (Fill) {
-                context.FillRectangle(Bounds, Brush);
+                context.FillEllipse(Ellipse, Brush);
             }
             else {
-                context.DrawRectangle(Bounds, Brush, StrokeWidth, StrokeStyle);
+                context.DrawEllipse(Ellipse, Brush, StrokeWidth, StrokeStyle);
             }
         }
 

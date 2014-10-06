@@ -1,7 +1,7 @@
 using System;
 using SharpDX.Direct2D1;
 
-namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
+namespace SharpDX.Toolkit.Direct2D {
     public sealed class CanvasGeometry : CanvasDrawing {
         public CanvasGeometry(Geometry geometry, Brush brush, float strokeWidth = 1.0f, StrokeStyle strokeStyle = null) {
             Geometry = geometry;

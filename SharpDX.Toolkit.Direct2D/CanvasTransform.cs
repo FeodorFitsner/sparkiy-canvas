@@ -1,7 +1,7 @@
 using System;
 using SharpDX.Direct2D1;
 
-namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
+namespace SharpDX.Toolkit.Direct2D {
     public sealed class CanvasTransform : CanvasObject {
         public CanvasTransform(Matrix3x2 transform) {
             Transform = transform;

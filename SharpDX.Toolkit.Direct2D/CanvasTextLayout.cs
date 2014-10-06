@@ -2,7 +2,7 @@ using System;
 using SharpDX.Direct2D1;
 using SharpDX.DirectWrite;
 
-namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
+namespace SharpDX.Toolkit.Direct2D {
     public sealed class CanvasTextLayout : CanvasDrawing
     {
        

@@ -1,11 +1,7 @@
 using System;
-using System.Linq;
-using System.Reflection;
 using SharpDX.Direct2D1;
-using SharpDX.IO;
-using SharpDX.WIC;
 
-namespace SharpDX.Toolkit.Direct2D.Test.CanvasStub {
+namespace SharpDX.Toolkit.Direct2D {
     public class CanvasMetafile : CanvasDrawing {
         private readonly string _fileName;
         private readonly GdiMetafile _gdiMetafile;
