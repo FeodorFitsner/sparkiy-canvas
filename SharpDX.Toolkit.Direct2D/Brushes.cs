@@ -6,7 +6,7 @@ namespace SharpDX.Toolkit.Direct2D
     {
         private static DeviceContext _deviceContext;
 
-        internal static void Initialize(DeviceContext deviceContext)
+        public static void Initialize(DeviceContext deviceContext)
         {
             _deviceContext = deviceContext;
         }

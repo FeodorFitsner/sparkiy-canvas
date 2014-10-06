@@ -32,9 +32,8 @@ namespace SharpDX.Toolkit.Direct2D {
             if (game == null) throw new ArgumentNullException("game");
             _game = game;
 
+			_service = game.Services.GetService<IDirect2DService>();
 
-            // TODO : check that game has the services
-            _service = game.Services.GetService<IDirect2DService>();
             _graphicsDeviceManager = (GraphicsDeviceManager) game.Services.GetService<IGraphicsDeviceManager>();
             _graphicsDeviceManager.DeviceChangeBegin += _graphicsDeviceManager_DeviceChangeBegin;
             _graphicsDeviceManager.DeviceChangeEnd += _graphicsDeviceManager_DeviceChangeEnd;
@@ -46,8 +45,6 @@ namespace SharpDX.Toolkit.Direct2D {
             _objects = new List<CanvasObject>();
             State = CanvasState.Refresh;
             _queue = new Queue<CanvasObject>();
-
-
         }
 
         public Factory Direct2DFactory {
@@ -62,10 +59,8 @@ namespace SharpDX.Toolkit.Direct2D {
         private void _graphicsDeviceManager_DeviceChangeEnd(object sender, EventArgs e) {
             GraphicsDevice graphicsDevice = _game.GraphicsDevice;
             RenderTarget2D backBuffer = graphicsDevice.BackBuffer;
-            _renderTarget2D =
-                ToDispose(RenderTarget2D.New(graphicsDevice, backBuffer.Width, backBuffer.Height, backBuffer.Format));
-            _bitmap1 = ToDispose(new Bitmap1(DeviceContext, _renderTarget2D));
-
+            _renderTarget2D = ToDispose(RenderTarget2D.New(graphicsDevice, backBuffer.Width, backBuffer.Height, backBuffer.Format));
+			_bitmap1 = ToDispose(new Bitmap1(DeviceContext, _renderTarget2D));
 
             State = CanvasState.Refresh;
         }
@@ -74,7 +69,7 @@ namespace SharpDX.Toolkit.Direct2D {
 
         #region Private properties
 
-        internal DeviceContext DeviceContext {
+        public DeviceContext DeviceContext {
             get { return _service.Context; }
         }
         public DirectWrite.Factory DirectWriteFactory { get { return _service.DwFactory; } }
@@ -162,7 +157,7 @@ namespace SharpDX.Toolkit.Direct2D {
                     throw new ArgumentOutOfRangeException();
             }
 
-            _spriteBatch.Begin();
+			_spriteBatch.Begin(SpriteSortMode.Immediate, this._graphicsDeviceManager.GraphicsDevice.BlendStates.NonPremultiplied);
             _spriteBatch.Draw(_renderTarget2D, Vector2.Zero, Color.White);
             _spriteBatch.End();
         }
