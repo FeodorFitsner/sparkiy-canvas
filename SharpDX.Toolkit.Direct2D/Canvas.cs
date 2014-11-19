@@ -79,7 +79,7 @@ namespace SharpDX.Toolkit.Direct2D {
 
         #region Public properties
 
-        public Color ClearColor { get; set; }
+        public Color4 ClearColor { get; set; }
 
         #endregion
 
