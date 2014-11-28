@@ -24,6 +24,8 @@ namespace SharpDX.Toolkit.Direct2D {
         private Bitmap1 _bitmap1;
         private RenderTarget2D _renderTarget2D;
 
+	    private bool needsClear;
+
         #endregion
 
         #region Public constructor
@@ -88,6 +90,7 @@ namespace SharpDX.Toolkit.Direct2D {
         public void Clear() {
             State = CanvasState.Refresh;
             _objects.Clear();
+            this.needsClear = true;
         }
 
         public SolidColorBrush GetSolidColorBrush(Color color) {
@@ -124,38 +127,24 @@ namespace SharpDX.Toolkit.Direct2D {
 
         public void Render() {
             if (_bitmap1 == null || _renderTarget2D == null) return;
-            switch (State) {
-                case CanvasState.Append:
-                    DeviceContext.Target = _bitmap1;
-                    using (DeviceContext.Target) {
-                        DeviceContext.BeginDraw();
-                        while (_queue.Count > 0) {
-                            CanvasObject o = _queue.Dequeue();
-                            o.DoWork(DeviceContext);
-                        }
-                        DeviceContext.EndDraw();
-                    }
-                    DeviceContext.Target = null;
-                    State = CanvasState.Cache;
-                    break;
-                case CanvasState.Refresh:
-                    DeviceContext.Target = _bitmap1;
-                    using (DeviceContext.Target) {
-                        DeviceContext.BeginDraw();
-                        DeviceContext.Clear(ClearColor);
-                        foreach (CanvasObject o in _objects) {
-                            o.DoWork(DeviceContext);
-                        }
-                        DeviceContext.EndDraw();
-                    }
-                    DeviceContext.Target = null;
-                    State = CanvasState.Cache;
-                    break;
-                case CanvasState.Cache:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+
+            DeviceContext.Target = _bitmap1;
+            using (DeviceContext.Target)
+            {
+                DeviceContext.BeginDraw();
+                if (this.needsClear)
+                {
+                    DeviceContext.Clear(this.ClearColor);
+                    this.needsClear = false;
+                }
+                while (_queue.Count > 0)
+                {
+                    CanvasObject o = _queue.Dequeue();
+                    o.DoWork(DeviceContext);
+                }
+                DeviceContext.EndDraw();
             }
+            DeviceContext.Target = null;
 
 			_spriteBatch.Begin(SpriteSortMode.Immediate, this._graphicsDeviceManager.GraphicsDevice.BlendStates.NonPremultiplied);
             _spriteBatch.Draw(_renderTarget2D, Vector2.Zero, Color.White);
