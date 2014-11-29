@@ -1,7 +1,9 @@
 using System;
+using System.Runtime.InteropServices;
 using SharpDX.Direct2D1;
 
 namespace SharpDX.Toolkit.Direct2D {
+    [ComVisible(false)]
     public class CanvasMetafile : CanvasDrawing {
         private readonly string _fileName;
         private readonly GdiMetafile _gdiMetafile;

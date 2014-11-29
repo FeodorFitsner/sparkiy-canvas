@@ -1,9 +1,11 @@
 using System;
+using System.Runtime.InteropServices;
 using SharpDX.Direct2D1;
 using SharpDX.DXGI;
 using SharpDX.Toolkit.Graphics;
 
 namespace SharpDX.Toolkit.Direct2D {
+    [ComVisible(false)]
     public sealed class CanvasBitmap : CanvasDrawing {
         private readonly Texture2D texture2D;
 		private readonly RectangleF destination;

@@ -1,7 +1,9 @@
 using System;
+using System.Runtime.InteropServices;
 using SharpDX.Direct2D1;
 
 namespace SharpDX.Toolkit.Direct2D {
+    [ComVisible(false)]
     public sealed class CanvasLine : CanvasDrawing {
         // TODO abstract base that has stroke and brush ??
 

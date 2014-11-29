@@ -1,7 +1,9 @@
 using System;
+using System.Runtime.InteropServices;
 using SharpDX.Direct2D1;
 
 namespace SharpDX.Toolkit.Direct2D {
+    [ComVisible(false)]
     public sealed class CanvasRectangle : CanvasDrawing {
         public CanvasRectangle(RectangleF bounds, Brush brush, bool fill = false, float strokeWidth = 1.0f,
             StrokeStyle strokeStyle = null) {

@@ -1,13 +1,15 @@
 using System;
+using System.Runtime.InteropServices;
 using SharpDX.Direct2D1;
 using SharpDX.Toolkit.Graphics;
 
 namespace SharpDX.Toolkit.Direct2D
 {
-	/// <summary>
-	/// Provides Direct2D support for drawing on D3D11.1 SwapChain
-	/// </summary>
-	public sealed class Direct2DService : Component, IDirect2DService
+    /// <summary>
+    /// Provides Direct2D support for drawing on D3D11.1 SwapChain
+    /// </summary>
+    [ComVisible(false)]
+    public sealed class Direct2DService : Component, IDirect2DService
 	{
 		// default debug level
 		private const DebugLevel D2DDebugLevel = DebugLevel.Information;
@@ -50,11 +52,14 @@ namespace SharpDX.Toolkit.Direct2D
 		/// </summary>
 		public SharpDX.DirectWrite.Factory1 DwFactory { get { return _dwFactory; } }
 
-		/// <summary>
-		/// Diposes all resources associated with the current <see cref="Direct2DService"/> instance.
-		/// </summary>
-		/// <param name="disposeManagedResources">Indicates whether to dispose management resources.</param>
-		protected override void Dispose(bool disposeManagedResources)
+        /// <summary>
+        /// Diposes all resources associated with the current <see cref="Direct2DService"/> instance.
+        /// </summary>
+        /// <param name="disposeManagedResources">Indicates whether to dispose management resources.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_dwFactory")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_device")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "_deviceContext")]
+        protected override void Dispose(bool disposeManagedResources)
 		{
 			base.Dispose(disposeManagedResources);
 

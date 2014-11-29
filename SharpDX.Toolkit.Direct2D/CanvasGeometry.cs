@@ -1,7 +1,9 @@
 using System;
+using System.Runtime.InteropServices;
 using SharpDX.Direct2D1;
 
 namespace SharpDX.Toolkit.Direct2D {
+    [ComVisible(false)]
     public sealed class CanvasGeometry : CanvasDrawing {
         public CanvasGeometry(Geometry geometry, Brush brush, float strokeWidth = 1.0f, StrokeStyle strokeStyle = null) {
             Geometry = geometry;

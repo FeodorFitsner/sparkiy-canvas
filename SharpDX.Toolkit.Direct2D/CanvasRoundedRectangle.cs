@@ -1,7 +1,9 @@
 using System;
 using SharpDX.Direct2D1;
+using System.Runtime.InteropServices;
 
 namespace SharpDX.Toolkit.Direct2D {
+    [ComVisible(false)]
     public sealed class CanvasRoundedRectangle : CanvasDrawing {
         // TODO : wrap types in constructor or in ??
         public CanvasRoundedRectangle(RoundedRectangle bounds, Brush brush, float strokeWidth = 1.0f,

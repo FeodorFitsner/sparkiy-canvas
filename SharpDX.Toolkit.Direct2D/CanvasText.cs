@@ -1,8 +1,10 @@
 using System;
+using System.Runtime.InteropServices;
 using SharpDX.Direct2D1;
 using SharpDX.DirectWrite;
 
 namespace SharpDX.Toolkit.Direct2D {
+    [ComVisible(false)]
     public sealed class CanvasText : CanvasDrawing
     {
         public CanvasText(string text, TextFormat textFormat, RectangleF layoutRect, Brush defaultForegroundBrush,
