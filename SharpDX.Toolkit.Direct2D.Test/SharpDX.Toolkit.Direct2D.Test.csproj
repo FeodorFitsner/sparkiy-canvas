@@ -17,7 +17,7 @@
     <PackageCertificateKeyFile>SharpDX.Toolkit.Direct2D.Test_TemporaryKey.pfx</PackageCertificateKeyFile>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
-    <NuGetPackageImportStamp>4efcdb5b</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>edbc0918</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -125,7 +125,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Logo.scale-100.png" />
@@ -152,12 +151,19 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SharpDX.Toolkit.Direct2D\SharpDX.Toolkit.Direct2D.csproj">
+      <Project>{76c266ae-873f-490a-9124-db60916d0f95}</Project>
+      <Name>SharpDX.Toolkit.Direct2D</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="SharpDX">
       <HintPath>$(SharpDXPackageBinDir)\SharpDX.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX.Direct2D1">
-      <HintPath>$(SharpDXPackageBinDir)\SharpDX.Direct2D1.dll</HintPath>
-    </Reference>
+    <Reference Include="SharpDX.Direct2D1, Version=2.6.3.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL" />
     <Reference Include="SharpDX.Direct3D11">
       <HintPath>$(SharpDXPackageBinDir)\SharpDX.Direct3D11.dll</HintPath>
     </Reference>
@@ -166,6 +172,9 @@
     </Reference>
     <Reference Include="SharpDX.Toolkit">
       <HintPath>$(SharpDXPackageBinDir)\SharpDX.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Toolkit.Audio">
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.Toolkit.Audio.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Toolkit.Game">
       <HintPath>$(SharpDXPackageBinDir)\SharpDX.Toolkit.Game.dll</HintPath>
@@ -176,12 +185,9 @@
     <Reference Include="SharpDX.Toolkit.Input">
       <HintPath>$(SharpDXPackageBinDir)\SharpDX.Toolkit.Input.dll</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SharpDX.Toolkit.Direct2D\SharpDX.Toolkit.Direct2D.csproj">
-      <Project>{76c266ae-873f-490a-9124-db60916d0f95}</Project>
-      <Name>SharpDX.Toolkit.Direct2D</Name>
-    </ProjectReference>
+    <Reference Include="SharpDX.XAudio2">
+      <HintPath>$(SharpDXPackageBinDir)\SharpDX.XAudio2.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
